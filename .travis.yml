@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.23.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - docker build -t qbic/spark:latest .
+
+script:
+  - docker-compose up --scale spark-worker=3 &
+  - sleep 20
+  - docker ps
+  - docker network ls
+  - docker run --rm -t --network spark-benchmark_spark-network qbic/spark:latest /spark/bin/spark-submit --master spark://spark-master:7077 --class org.apache.spark.examples.SparkPi /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
+  
+
+
