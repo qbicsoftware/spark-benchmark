@@ -1,4 +1,5 @@
-# spark-experiments
+# Spark-Benchmark
+This contains various infrastructure experiments and benchmarks for Apache Spark. This is under heavy construction.
 
 Build Dockerfile and tag with qbic/spark:latest .
 ```bash
