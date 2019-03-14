@@ -13,12 +13,12 @@ docker-compose up --scale spark-worker=3
 
 Verify that the network is up. Visit localhost:8080 and
 ```bash
-docker network -ls
+docker network ls
 ```
 
 Launch a new instance as the driver. You may have to adapt the network name (could be named differently depending on your path).
 ```bash
-docker run --rm -it --network spark_network qbic/spark:latest /bin/sh
+docker run --rm -it --network spark-benchmark_spark-network qbic/spark:latest /bin/sh
 ```
 
 Run a job on all workers and verifiy that different workers are taking on different jobs.    
