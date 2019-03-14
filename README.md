@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark.svg?branch=master)](https://travis-ci.com/qbicsoftware/spark-benchmark)
 # Spark-Benchmark
 This contains various infrastructure experiments and benchmarks for Apache Spark. This is under heavy construction.
 
