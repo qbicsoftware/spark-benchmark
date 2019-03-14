@@ -15,4 +15,11 @@ before_install:
 install:
   - docker build -t qbic/spark:latest .
   - docker-compose up --scale spark-worker=3
+  - docker network -ls
+
+script:
+  - docker run --rm -it --network spark_network qbic/spark:latest /bin/sh
+  - /spark/bin/spark-submit --master spark://spark-master:7077 --class \
+    org.apache.spark.examples.SparkPi \
+    /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
 
