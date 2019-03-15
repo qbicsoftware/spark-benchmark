@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   spark-master:
-    image: qbic/spark:latest
+    image: qbic/spark:latest_master
     container_name: spark-master
     hostname: spark-master
     ports:
@@ -18,7 +18,7 @@ services:
       - /mnt/spark-data:/opt/spark-data
     command: "/start-master.sh"
   spark-worker:
-    image: qbic/spark:latest
+    image: qbic/spark:latest_worker
     depends_on:
       - spark-master
     ports:
