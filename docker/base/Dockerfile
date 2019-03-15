@@ -34,7 +34,7 @@ if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
 if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
 rm -r /root/.cache
 
-### 5. Download and unpack scala
+### 5. Download and unpack Scala
 RUN apk add --no-cache --virtual=.build-dependencies && \
     cd "/tmp" && \
     wget --no-verbose "https://downloads.typesafe.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.tgz" && \
@@ -46,12 +46,12 @@ RUN apk add --no-cache --virtual=.build-dependencies && \
     apk del .build-dependencies && \
     rm -rf "/tmp/"*
 
-### 6. Install Scala
+### 6. Install SBT
 RUN export PATH="/usr/local/sbt/bin:$PATH" &&  apk update && apk add ca-certificates wget tar && mkdir -p "/usr/local/sbt" && \
     wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/download/v${SBT_VERSION}/sbt-${SBT_VERSION}.tgz" \
      | tar xz -C /usr/local/sbt --strip-components=1 && sbt sbtVersion
 
-### 7. Download spark
+### 7. Download Spark
 RUN wget http://apache.mirror.anlx.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 
 ### 8. Extract and move spark to /spark
