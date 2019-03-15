@@ -20,7 +20,8 @@ script:
   - sleep 20
   - docker ps
   - docker network ls
-  - docker run --rm -t --network spark-benchmark_spark-network qbic/spark:latest /spark/bin/spark-submit --master spark://spark-master:7077 --class org.apache.spark.examples.SparkPi /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
+  - cd spark-submit && chmod +x local_scala_pi.sh && ./local_scala_pi.sh
+  - chmod +x local_python_pi.sh && ./local_python_pi.sh
   
 
 

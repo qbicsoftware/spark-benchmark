@@ -18,7 +18,8 @@ RUN apk update \
     wget \
     tar \
     jq \
-    unzip 
+    unzip \
+    vim
 
 ### 3. Get Java via the package manager
 RUN apk add --no-cache openjdk8-jre
@@ -60,4 +61,7 @@ RUN tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
 ### 9. Copy master and worker startup scripts
 COPY start-master.sh /start-master.sh
 COPY start-worker.sh /start-worker.sh
+
+### 10 Copy spark-submit scripts
+COPY spark-submit /spark-submit
 
