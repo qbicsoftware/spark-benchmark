@@ -13,15 +13,16 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - docker build -t qbic/spark:latest .
+  - chmod +x build-images.sh
+  - ./build-images.sh
 
 script:
-  - docker-compose up --scale spark-worker=3 &
-  - sleep 20
+  - docker-compose up --scale spark-worker=3 & # ampersand is required to run the workers in the background -> don't block the main travis thread
+  - sleep 20 # wait until the workers are up
   - docker ps
   - docker network ls
-  - cd spark-submit && chmod +x local_scala_pi.sh && ./local_scala_pi.sh
-  - chmod +x local_python_pi.sh && ./local_python_pi.sh
+  - cd spark-submit && chmod +x local_scala_pi.sh && ./local_scala_pi.sh # run scala pi
+  - chmod +x local_python_pi.sh && ./local_python_pi.sh # run python pi
 
 notifications:
   email:
