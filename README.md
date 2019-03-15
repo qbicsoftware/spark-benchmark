@@ -59,5 +59,8 @@ Analogous to above your job should now run and calculate Pi. You can always veri
 
 Moreover, you should find example bash scripts for job submissions in this repository under the /spark-submit folder . 
 
+# Logs
+All log files (stdout and stderr) can be viewed on localhost:8080 by clicking on either the completed job and then the specific worker or by accessing the specific worker directly from the front page.
+
 
 

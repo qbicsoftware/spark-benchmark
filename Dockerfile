@@ -7,6 +7,7 @@ ENV HADOOP_VERSION=2.7
 ENV SCALA_VERSION=2.12.8
 ENV SCALA_HOME=/usr/share/scala
 ENV SBT_VERSION=1.2.8
+ENV SPARK_HOME=/spark
 
 ### 2. Download and install all necessary dependencies
 RUN apk update \

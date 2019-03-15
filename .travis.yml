@@ -22,6 +22,13 @@ script:
   - docker network ls
   - cd spark-submit && chmod +x local_scala_pi.sh && ./local_scala_pi.sh
   - chmod +x local_python_pi.sh && ./local_python_pi.sh
+
+notifications:
+  email:
+    recipients:
+      - lukas.heumos@student.uni-tuebingen.de
+    on_success: never 
+    on_failure: always 
   
 
 
