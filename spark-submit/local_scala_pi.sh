@@ -1,4 +1,3 @@
-
 #!/bin/bash
 SPARK_MASTER_URL=spark://spark-master:7077
 SPARK_APPLICATION_JAR_LOCATION=/spark/examples/jars/spark-examples_2.11-2.4.0.jar
