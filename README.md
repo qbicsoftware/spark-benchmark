@@ -3,12 +3,17 @@
 This repository contains various infrastructure experiments and benchmarks for Apache Spark. It is under heavy construction.
 
 # Setting up a local network and running an example on all workers
-Build Dockerfile and tag with qbic/spark:latest .
+Build Base, Master, Worker and Submit Dockerfiles 
 ```bash
-docker build -t qbic/spark:latest . 
-```
+./build-images.sh 
+```     
+This provides the Docker Images:    
+qbic/spark:latest_base    
+qbic/spark:latest_master    
+qbic/spark:latest_worker    
+qbic/spark:latest_submit
 
-Run docker-compose .
+Run docker-compose. This sets up the network and adds a number of workers (here 3).
 ```bash
 docker-compose up --scale spark-worker=3
 ```
@@ -18,9 +23,9 @@ Verify that the network is up. Visit localhost:8080 and
 docker network ls
 ```
 
-Launch a new instance as the driver. You may have to adapt the network name (could be named differently depending on your path).
+Launch a new instance as the driver.
 ```bash
-docker run --rm -it --network spark-benchmark_spark-network qbic/spark:latest /bin/sh
+docker run --rm -it --network spark-benchmark_spark-network qbic/spark:latest_submit /bin/sh
 ```
 
 Run a job on all workers and verifiy that different workers are taking on different jobs.    
@@ -42,7 +47,7 @@ To access the local file system a volume has to be mounted for spark to be able 
 Place your program which you want to access from the driver into an isolated folder, say: /mnt/spark-apps .           
 Launch your driver instance using the *-v* option to mount the volume /path/to/volume:/path/to/mount/to . Imagine there's a python script pi.py in /mnt/spark-apps:    
 ```bash
-docker run --rm -it --network spark-benchmark_spark-network -v /mnt/spark-apps:/opt/spark-apps qbic/spark:latest /bin/sh
+docker run --rm -it --network spark-benchmark_spark-network -v /mnt/spark-apps:/opt/spark-apps qbic/spark:latest_submit /bin/sh
 ```
 
 You should now be able to find your script from the driver instance in /opt/spark-apps:    
