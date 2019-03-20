@@ -3,10 +3,15 @@
 This repository contains various infrastructure experiments and benchmarks for Apache Spark. It is under heavy construction.
 
 # Setting up a local network and running an example on all workers
-Build Dockerfile and tag with qbic/spark:latest .
+Build Base, Master, Worker and Submit Dockerfiles 
 ```bash
-docker build -t qbic/spark:latest . 
-```
+./build-images.sh 
+```     
+This provides the Docker Images:    
+qbic/spark:latest_base    
+qbic/spark:latest_master    
+qbic/spark:latest_worker    
+qbic/spark:latest_submit
 
 Run docker-compose .
 ```bash
@@ -22,6 +27,8 @@ Launch a new instance as the driver. You may have to adapt the network name (cou
 ```bash
 docker run --rm -it --network spark-benchmark_spark-network qbic/spark:latest /bin/sh
 ```
+
+docker run --rm -t --network spark_benchmark_spark-network qbic/spark:latest /spark/bin/spark-submit
 
 Run a job on all workers and verifiy that different workers are taking on different jobs.    
 We're calculating PI on three workers.
