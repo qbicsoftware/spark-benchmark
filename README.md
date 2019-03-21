@@ -31,9 +31,9 @@ docker run --rm -it --network spark-benchmark_spark-network qbic/spark:latest_su
 Run a job on all workers and verifiy that different workers are taking on different jobs.    
 We're calculating PI on three workers.
 ```bash
-/spark/bin/spark-submit --master spark://spark-master:7077 --class \
-    org.apache.spark.examples.SparkPi \
-    /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
+/spark/bin/spark-submit --master spark://spark-master:7077 \
+--class org.apache.spark.examples.SparkPi \
+/spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
 ```
 The job should also show up on localhost:8080 as running.
 
