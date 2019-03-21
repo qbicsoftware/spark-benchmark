@@ -13,6 +13,11 @@ qbic/spark:latest_master
 qbic/spark:latest_worker    
 qbic/spark:latest_submit
 
+Verify that the docker images have been built
+```bash
+docker image ls
+```
+
 Run docker-compose. This sets up the network and adds a number of workers (here 3).
 ```bash
 docker-compose up --scale spark-worker=3
