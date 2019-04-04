@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark.svg?branch=master)](https://travis-ci.com/qbicsoftware/spark-benchmark)
-# Spark-Benchmark
+# Spark-Service
 This repository contains various infrastructure experiments and benchmarks for Apache Spark. It is under heavy construction.
 
 # Setting up a local network and running an example on all workers
