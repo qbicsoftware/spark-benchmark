@@ -1,6 +1,6 @@
 #!/bin/sh
 SPARK_MASTER_URL=spark://spark-master:7077
-SPARK_APPLICATION_JAR_LOCATION=/opt/spark-apps/pi_2.11-2.4.0.jar
+SPARK_APPLICATION_JAR_LOCATION=/opt/spark-apps/pi_2.12-2.4.1.jar
 SPARK_APPLICATION_MAIN_CLASS=org.apache.spark.SparkPi
 
 target=/mnt/spark-apps/
