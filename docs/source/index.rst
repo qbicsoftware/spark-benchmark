@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to spark-service's documentation!
-=====================================
+=========================================
 
 .. toctree::
    :maxdepth: 2
@@ -22,7 +22,7 @@ Indices and tables
 
 
 spark-service
-========
+=============
 
 spark-service will solve your problem of where to start with documentation,
 by providing a basic explanation of how to do it easily.
