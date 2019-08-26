@@ -8,9 +8,11 @@ Welcome to spark-service's documentation!
    readme
    installation
    usage
+   configuration
    contributing
-   authors
+   known_issues
    history
+   authors
 
 Indices and tables
 ==================
