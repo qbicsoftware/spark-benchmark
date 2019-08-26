@@ -52,7 +52,9 @@ To access the local file system a volume has to be mounted for spark to be able 
 Place your program which you want to access from the driver into an isolated folder, say: /mnt/spark-apps .           
 Launch your driver instance using the *-v* option to mount the volume /path/to/volume:/path/to/mount/to . Imagine there's a python script pi.py in /mnt/spark-apps:    
 ```bash
-docker run --rm -it --network spark-service_spark-network -v /mnt/spark-apps:/opt/spark-apps qbic/spark:latest_submit /bin/sh
+docker run --rm -it --network spark-service_spark-network\
+-v /mnt/spark-apps:/opt/spark-apps -v /mnt/spark-data:/opt/spark-data \
+qbic/spark:latest_submit /bin/sh
 ```
 
 You should now be able to find your script from the driver instance in /opt/spark-apps:    
