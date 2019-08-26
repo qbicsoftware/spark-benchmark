@@ -9,8 +9,13 @@ spark-service
 spark-service provides a containerized solution for a quick setup of an Apache Spark infrastructure.
 It is designed to faciliate benchmarking and interoperability with `scark-cli <https://github.com/qbicsoftware/scark-cli>`_.
 
+Spark
+-----
+
+If you need an introduction to spark head over to `Spark introduction <spark.html>`_.
+
 Features
-========
+--------
 
 - spark-service offers docker containers for master, work and submit nodes
 - All docker containers are integrated and connected via docker-compose
@@ -19,12 +24,12 @@ Features
 - spark-service is specifically designed to interoperate with `scark-cli <https://github.com/qbicsoftware/scark-cli>`_
 
 Documentation
-=============
+-------------
 
 Please visit the `Documentation <https://spark-service.readthedocs.io/en/latest/>`_.
 
 Authors
-=======
+-------
 
 spark-service was designed by `Lukas Heumos <http://github.com/zethson>`_.
 

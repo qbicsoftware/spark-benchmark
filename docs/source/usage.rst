@@ -47,5 +47,11 @@ Now you can submit your script to the cluster to run it:
 
 Analogous to above your job should now run and calculate Pi. You can always verify that it ran on all workers using the web UI on localhost:8080 .
 Moreover, you should find example bash scripts for job submissions `here <https://github.com/qbicsoftware/spark-service/tree/development/spark-submit>`_.
+
+Logs
+----
+
+All log files (stdout and stderr) can be viewed on localhost:8080 by clicking on either the completed job and then the specific worker or by accessing the specific worker directly from the front page.
+
 Head over to `configuration <configuration.html>`_ for information about how to configure the respective nodes and the expected performance.
 

@@ -6,6 +6,7 @@ Welcome to spark-service's documentation!
    :caption: Contents:
 
    readme
+   spark
    installation
    usage
    configuration
@@ -16,6 +17,5 @@ Welcome to spark-service's documentation!
 
 Indices and tables
 ==================
-* :ref:`genindex`
-* :ref:`modindex`
+
 * :ref:`search`
