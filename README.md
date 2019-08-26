@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/spark-service.svg?branch=master)](https://travis-ci.com/qbicsoftware/spark-service)
+[![Documentation Status](https://readthedocs.org/projects/spark-service/badge/?version=latest)](https://spark-service.readthedocs.io/en/latest/?badge=latest)
+
 # Spark-Service
 This repository contains various infrastructure experiments and benchmarks for Apache Spark. It is under heavy construction.
 

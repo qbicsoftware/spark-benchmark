@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'scark-cli'
+project = 'spark-service'
 copyright = '2019, Lukas Heumos'
 author = 'Lukas Heumos'
 
