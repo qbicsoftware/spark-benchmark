@@ -2,9 +2,10 @@
 FROM alpine:3.9
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
-ENV SPARK_VERSION=2.4.0
-ENV HADOOP_VERSION=2.7
+ENV SPARK_VERSION=2.4.1
+ENV HADOOP_VERSION=2.7.3
 ENV SCALA_VERSION=2.12.8
+ENV MAIN_SCALA_VERSION=2.12
 ENV SCALA_HOME=/usr/share/scala
 ENV SBT_VERSION=1.2.8
 ENV SPARK_HOME=/spark
@@ -59,10 +60,22 @@ RUN export PATH="/usr/local/sbt/bin:$PATH" && \
      | tar xz -C /usr/local/sbt --strip-components=1 && sbt sbtVersion
 
 ### 7. Download, extract and move Spark to /spark
-RUN wget http://apache.mirror.anlx.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
-    tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
-    mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} /spark && \
-    rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop-scala-${MAIN_SCALA_VERSION}.tgz && \
+    tar -xzf spark-${SPARK_VERSION}-bin-without-hadoop-scala-${MAIN_SCALA_VERSION}.tgz && \
+    mv spark-${SPARK_VERSION}-bin-without-hadoop-scala-${MAIN_SCALA_VERSION} /spark && \
+    rm -rf spark-${SPARK_VERSION}-bin-without-hadoop-scala-${MAIN_SCALA_VERSION}.tgz
+
+### 8. Download, extract hadoop
+RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
+    tar -xvf hadoop-${HADOOP_VERSION}.tar.gz && \
+    rm -rf hadoop-${HADOOP_VERSION}.tar.gz
+
+### 9. Make Hadoop available to Spark    
+RUN cd /spark/conf && \
+    cp spark-env.sh.template ./spark-env.sh && \
+    echo "export SPARK_DIST_CLASSPATH=$(/hadoop-${HADOOP_VERSION}/bin/hadoop classpath)" >> spark-env.sh 
+    
+ 
 
 
 
