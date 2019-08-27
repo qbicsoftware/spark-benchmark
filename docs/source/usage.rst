@@ -33,7 +33,7 @@ Imagine there's a python script pi.py in /mnt/spark-apps:
     -v /mnt/spark-apps:/opt/spark-apps -v /mnt/spark-data:/opt/spark-data \
     qbic/spark:latest_submit /bin/sh
 
-You should now be able to find your script from the driver instance in /opt/spark-apps:    
+You should now be able to find your script from the driver instance in /opt/spark-apps:
 
 .. code-block:: bash
 
