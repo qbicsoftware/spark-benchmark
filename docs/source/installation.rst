@@ -8,7 +8,8 @@ Obtaining the code
 
 First, clone the code from Github. Please mind the branches. If you want to work with the latest release always use the master branch.
 
-.. code-block bash
+.. code-block:: bash
+
     https://github.com/qbicsoftware/spark-service
 
 Building the docker images
