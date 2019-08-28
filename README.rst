@@ -13,6 +13,9 @@ spark-service
 spark-service provides a containerized solution for a quick setup of an Apache Spark infrastructure.
 It is designed to faciliate benchmarking and interoperability with `scark-cli <https://github.com/qbicsoftware/scark-cli>`_.
 
+.. image:: images/spark-service_gif.gif
+    :alt: spark-service in action
+
 Spark
 -----
 
