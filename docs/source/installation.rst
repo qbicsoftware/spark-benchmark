@@ -34,23 +34,5 @@ Verify that the docker images have been built
 
     docker image ls
 
-Run docker-compose. This sets up the network and adds a number of workers (here 3).
-
-.. code-block:: bash
-
-    docker-compose up --scale spark-worker=3
-
-Verify that the network is up. Visit localhost:8080 and
-
-.. code-block:: bash
-
-    docker network ls
-
-Launch a new instance as the driver.
-
-.. code-block:: bash
-
-    docker run --rm -it --network spark-service_spark-network qbic/spark:latest_submit /bin/sh
-
 Refer to `usage <usage.html>`_ for detailed instructions about how to run example scripts and your custom programs on the spark network.
 

@@ -1,7 +1,28 @@
 Usage
 =====
 
-The following section will guide you through running example scripts, as well as custom scripts.
+The following section will guide you through setting up a Spark network and running example scripts, as well as custom scripts.
+
+Setting up a Spark network
+--------------------------
+
+Run docker-compose. This sets up the network and adds a number of workers (here 3).
+
+.. code-block:: bash
+
+    docker-compose up --scale spark-worker=3
+
+Verify that the network is up. Visit localhost:8080 and
+
+.. code-block:: bash
+
+    docker network ls
+
+Launch a new instance as the driver.
+
+.. code-block:: bash
+
+    docker run --rm -it --network spark-service_spark-network qbic/spark:latest_submit /bin/sh
 
 Running an example script
 -------------------------
