@@ -35,5 +35,5 @@ Please visit the `Documentation <https://spark-service.readthedocs.io/en/latest/
 Authors
 -------
 
-spark-service was designed by `Lukas Heumos <http://github.com/zethson>`_.
+spark-service was designed and implemented by `Lukas Heumos <http://github.com/zethson>`_.
 
