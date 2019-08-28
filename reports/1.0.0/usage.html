@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Usage &#8212; spark-service 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">spark-service 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>The following section will guide you through setting up a Spark network and running example scripts, as well as custom scripts.</p>
+<div class="section" id="setting-up-a-spark-network">
+<h2>Setting up a Spark network<a class="headerlink" href="#setting-up-a-spark-network" title="Permalink to this headline">¶</a></h2>
+<p>Run docker-compose. This sets up the network and adds a number of workers (here 3).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up --scale spark-worker<span class="o">=</span><span class="m">3</span>
+</pre></div>
+</div>
+<p>Verify that the network is up. Visit localhost:8080 and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker network ls
+</pre></div>
+</div>
+<p>Launch a new instance as the driver.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -it --network spark-service_spark-network qbic/spark:latest_submit /bin/sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-an-example-script">
+<h2>Running an example script<a class="headerlink" href="#running-an-example-script" title="Permalink to this headline">¶</a></h2>
+<p>A few example scripts are already provided by the spark installation. Let’s calculate PI using our (three) worker nodes.
+While running the job you can observe, that the different workers are taking up different jobs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 <span class="se">\</span>
+--class org.apache.spark.examples.SparkPi <span class="se">\</span>
+/spark/examples/jars/spark-examples_2.12-2.4.1.jar <span class="m">1000</span>
+</pre></div>
+</div>
+<p>Visit localhost:8080 using your favorite browser and the job shuold show up as running.
+<em>Pi is roughly 3.141609511416095</em> should be the result.
+On localhost:8080 you should also see that a job has been completed.</p>
+</div>
+<div class="section" id="running-custom-programs">
+<h2>Running custom programs<a class="headerlink" href="#running-custom-programs" title="Permalink to this headline">¶</a></h2>
+<p>To access the local file system a volume has to be mounted for spark to be able to access the program.
+Place your program which you want to access from the driver into an isolated folder, say: /mnt/spark-apps .
+Launch your driver instance using the <em>-v</em> option to mount the volume /path/to/volume:/path/to/mount/to .
+Imagine there’s a python script pi.py in /mnt/spark-apps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -it --network spark-service_spark-network <span class="se">\</span>
+-v /mnt/spark-apps:/opt/spark-apps -v /mnt/spark-data:/opt/spark-data <span class="se">\</span>
+qbic/spark:latest_submit /bin/sh
+</pre></div>
+</div>
+<p>You should now be able to find your script from the driver instance in /opt/spark-apps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls /opt/spark-apps
+</pre></div>
+</div>
+<p>Now you can submit your script to the cluster to run it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 /opt/spark-apps/pi.py <span class="m">1000</span>
+</pre></div>
+</div>
+<p>Analogous to above your job should now run and calculate Pi. You can always verify that it ran on all workers using the web UI on localhost:8080 .
+Moreover, you should find example bash scripts for job submissions <a class="reference external" href="https://github.com/qbicsoftware/spark-service/tree/development/spark-submit">here</a>.</p>
+</div>
+<div class="section" id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
+<p>All log files (stdout and stderr) can be viewed on localhost:8080 by clicking on either the completed job and then the specific worker or by accessing the specific worker directly from the front page.</p>
+<p>Head over to <a class="reference external" href="configuration.html">configuration</a> for information about how to configure the respective nodes and the expected performance.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#setting-up-a-spark-network">Setting up a Spark network</a></li>
+<li><a class="reference internal" href="#running-an-example-script">Running an example script</a></li>
+<li><a class="reference internal" href="#running-custom-programs">Running custom programs</a></li>
+<li><a class="reference internal" href="#logs">Logs</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="configuration.html"
+                        title="next chapter">Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">spark-service 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Lukas Heumos.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>
