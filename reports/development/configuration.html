@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration &#8212; spark-service 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">spark-service 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>For the following section we assume that we are working on a machine with 64 cores and 128 gigabytes of RAM.
+The configuration for the worker nodes can be found <a class="reference external" href="https://github.com/qbicsoftware/spark-service/blob/development/env/spark-worker.sh">here</a>.</p>
+<p>Commonly one uses only a single worker node per machine, since each worker spins up its own JVM.
+Since the change <a class="reference external" href="https://issues.apache.org/jira/browse/SPARK-1706">SPARK-1706 Allow multiple executors per worker in Standalone mode</a> in Spark 1.4 it’s currently possible to start multiple executors in a single JVM process of a worker.</p>
+<p>To launch multiple executors on a machine you start multiple standalone workers, each with its own JVM. It introduces unnecessary overhead due to these JVM processes, provided that there are enough cores on that worker.
+If you are running Spark in standalone mode on memory-rich nodes it can be beneficial to have multiple worker instances on the same node as a very large heap size has two disadvantages:</p>
+<ul class="simple">
+<li>Garbage collector pauses can hurt throughput of Spark jobs.</li>
+<li>Heap size of &gt;32 GB can’t use CompressedOops. So 35 GB is actually less than 32 GB.</li>
+</ul>
+<p>To explore the effects of providing multiple cores or using multiple workers on your standalone Spark cluster you can run the PI example from above with different parameters settings.
+You can for example run it with 64 workers using 1 core each or with 1 worker using 64 cores. You will quickly notice that the 64 workers will have an advantage on the standalone cluster, since they’re less prone to GC pauses.
+Moreover, the number of executor cores per worker and the overall executor cores can be limited using the following options:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--executor-cores <span class="m">1</span>
+--total-executor-cores <span class="m">2</span>
+</pre></div>
+</div>
+<p>You can resubmit your job now:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 --class org.apache.spark.examples.SparkPi <span class="se">\</span>
+--executor-cores <span class="m">1</span> --total-executor-cores <span class="m">2</span> <span class="se">\</span>
+/spark/examples/jars/spark-examples_2.11-2.4.0.jar <span class="m">5000</span>
+</pre></div>
+</div>
+<p>You could notice severe performance improvements, since executors won’t try to use other worker’s cores.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing.html"
+                        title="next chapter">Contributing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/configuration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">spark-service 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Lukas Heumos.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>
