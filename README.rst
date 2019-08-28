@@ -1,5 +1,9 @@
 .. image:: https://travis-ci.com/qbicsoftware/spark-service.svg?branch=development
     :target: https://travis-ci.com/qbicsoftware/spark-service
+.. image:: https://img.shields.io/github/v/release/qbicsoftware/spark-service
+    :alt: GitHub release (latest by date)
+.. image:: https://img.shields.io/github/commits-since/qbicsoftware/spark-service/latest
+    :alt: GitHub commits since latest release
 .. image:: https://readthedocs.org/projects/spark-service/badge/?version=latest
     :target: https://spark-service.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status

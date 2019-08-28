@@ -34,7 +34,7 @@ While running the job you can observe, that the different workers are taking up 
 
     /spark/bin/spark-submit --master spark://spark-master:7077 \
     --class org.apache.spark.examples.SparkPi \
-    /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000
+    /spark/examples/jars/spark-examples_2.12-2.4.1.jar 1000
 
 Visit localhost:8080 using your favorite browser and the job shuold show up as running.
 *Pi is roughly 3.141609511416095* should be the result.
