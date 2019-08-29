@@ -13,9 +13,10 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-install:
-  - chmod +x build-images.sh
-  - ./build-images.sh
+# should not be needed anymore, since all images are now on Dockerhub
+#install:
+#  - chmod +x build-images.sh
+#  - ./build-images.sh
 
 script:
   # ampersand is required to run the workers in the background -> don't block the main travis thread
