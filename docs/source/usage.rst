@@ -6,7 +6,8 @@ The following section will guide you through setting up a Spark network and runn
 Setting up a Spark network
 --------------------------
 
-Run docker-compose. This sets up the network and adds a number of workers (here 3).
+Run docker-compose. All required docker images (base, master, worker, submit) will automatically be pulled from Dockerhub. 
+Subsequently, the Spark network will be set up. A user specified number of workers (see example below) will automatically be added.
 
 .. code-block:: bash
 
@@ -22,7 +23,7 @@ Launch a new instance as the driver.
 
 .. code-block:: bash
 
-    docker run --rm -it --network spark-service_spark-network qbic/spark:latest_submit /bin/sh
+    docker run --rm -it --network spark-service_spark-network zethson/qbic_spark_submit:latest /bin/sh
 
 Running an example script
 -------------------------
@@ -52,7 +53,7 @@ Imagine there's a python script pi.py in /mnt/spark-apps:
 
     docker run --rm -it --network spark-service_spark-network \
     -v /mnt/spark-apps:/opt/spark-apps -v /mnt/spark-data:/opt/spark-data \
-    qbic/spark:latest_submit /bin/sh
+    zethson/qbic_spark_submit:latest /bin/sh
 
 You should now be able to find your script from the driver instance in /opt/spark-apps:
 
