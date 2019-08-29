@@ -1,4 +1,4 @@
-FROM qbic/spark:latest_base
+FROM zethson/qbic_spark_base
 
 ENV SPARK_MASTER_URL="spark://spark-master:7077"
 ENV SPARK_SUBMIT_ARGS=""
