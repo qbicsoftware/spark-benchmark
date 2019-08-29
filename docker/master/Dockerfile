@@ -1,4 +1,4 @@
-FROM qbic/spark:latest_base
+FROM zethson/qbic_spark_base
 
 COPY start-master.sh /start-master.sh
 
