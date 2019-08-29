@@ -8,6 +8,19 @@
     :target: https://spark-service.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+Docker Builds Statuses
+
+.. image:: https://img.shields.io/docker/cloud/automated/zethson/qbic_spark_base
+   :alt: Docker Cloud Automated build
+.. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_base
+    :alt: Docker Cloud Build Status
+.. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_master
+    :alt: Docker Cloud Build Status
+.. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_worker
+    :alt: Docker Cloud Build Status
+.. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_submit
+    :alt: Docker Cloud Build Status
+
 spark-service
 =============
 spark-service provides a containerized solution for a quick setup of an Apache Spark infrastructure.
