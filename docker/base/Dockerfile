@@ -9,7 +9,7 @@ ENV SCALA_VERSION=2.12.8
 ENV MAIN_SCALA_VERSION=2.12
 ENV SCALA_HOME=/usr/share/scala
 ENV SBT_VERSION=1.2.8
-ENV SCARK-CLI_VERSION=1.1.0
+ENV SCARK_CLI_VERSION=1.1.0
 
 ### 2. Download and install all necessary dependencies and utilities
 RUN apk update && \
@@ -77,7 +77,11 @@ RUN cd /spark/conf && \
     echo "export SPARK_DIST_CLASSPATH=$(/hadoop-${HADOOP_VERSION}/bin/hadoop classpath)" >> spark-env.sh 
 
 ### 10 Download scark-cli
-RUN wget https://github.com/qbicsoftware/scark-cli/releases/download/1.1.0/scark-cli-1.1.0.jar && \
+RUN wget https://github.com/qbicsoftware/scark-cli/releases/download/${SCARK_CLI_VERSION}/scark-cli-${SCARK_CLI_VERSION}.jar && \
      mkdir /opt/spark-apps && \
-     mv scark-cli-1.1.0.jar /opt/spark-apps    
+     mv scark-cli-${SCARK_CLI_VERSION}.jar /opt/spark-apps
+    
+ 
+
+
 
