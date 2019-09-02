@@ -77,11 +77,7 @@ RUN cd /spark/conf && \
     echo "export SPARK_DIST_CLASSPATH=$(/hadoop-${HADOOP_VERSION}/bin/hadoop classpath)" >> spark-env.sh 
 
 ### 10 Download scark-cli
-RUN wget https://github.com/qbicsoftware/scark-cli/releases/download/${SCARK-CLI_VERSION}/scark-cli-${SCARK-CLI_VERSION}.jar && \
+RUN wget https://github.com/qbicsoftware/scark-cli/releases/download/1.1.0/scark-cli-1.1.0.jar && \
      mkdir /opt/spark-apps && \
-     mv scark-cli-${SCARK-CLI_VERSION}.jar /opt/spark-apps
-    
- 
-
-
+     mv scark-cli-1.1.0.jar /opt/spark-apps    
 
