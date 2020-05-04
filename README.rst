@@ -14,11 +14,11 @@
     :target: https://spark-service.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-Docker Builds Statuses
+**Docker Builds Statuses**
 
 .. image:: https://img.shields.io/docker/cloud/automated/zethson/qbic_spark_base
     :target: https://img.shields.io/docker/cloud/automated/zethson/qbic_spark_base
-   :alt: Docker Cloud Automated build
+    :alt: Docker Cloud Automated build
    
 .. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_base
     :target: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_base
