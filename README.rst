@@ -1,9 +1,15 @@
 .. image:: https://travis-ci.com/qbicsoftware/spark-service.svg?branch=development
     :target: https://travis-ci.com/qbicsoftware/spark-service
+    :alt: Development branch build status
+    
 .. image:: https://img.shields.io/github/v/release/qbicsoftware/spark-service
+    :target: https://img.shields.io/github/v/release/qbicsoftware/spark-service
     :alt: GitHub release (latest by date)
+    
 .. image:: https://img.shields.io/github/commits-since/qbicsoftware/spark-service/latest
+    :target: https://img.shields.io/github/commits-since/qbicsoftware/spark-service/latest
     :alt: GitHub commits since latest release
+    
 .. image:: https://readthedocs.org/projects/spark-service/badge/?version=latest
     :target: https://spark-service.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
@@ -11,14 +17,23 @@
 Docker Builds Statuses
 
 .. image:: https://img.shields.io/docker/cloud/automated/zethson/qbic_spark_base
+    :target: https://img.shields.io/docker/cloud/automated/zethson/qbic_spark_base
    :alt: Docker Cloud Automated build
+   
 .. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_base
+    :target: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_base
     :alt: Docker Cloud Build Status
+    
 .. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_master
+    :target: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_master
     :alt: Docker Cloud Build Status
+    
 .. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_worker
+    :target: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_worker
     :alt: Docker Cloud Build Status
+    
 .. image:: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_submit
+    :target: https://img.shields.io/docker/cloud/build/zethson/qbic_spark_submit
     :alt: Docker Cloud Build Status
 
 spark-service
